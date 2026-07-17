@@ -16,7 +16,7 @@
 ## Stack
 
 * **Backend:** 
-* **AI:**
+* **AI:** Claude AI
 * **Integrations:** 
-* **Frontend:** 
+* **Frontend:** React
 * **Deployment:**
