@@ -27,7 +27,6 @@
 
 <rect width="1000" height="650" fill="#ffffff"/>
 
-<!-- User Page -->
 <rect x="60" y="60" width="220" height="230" rx="4" fill="#ffffff" stroke="#111111" stroke-width="2"/>
 <line x1="60" y1="100" x2="280" y2="100" stroke="#111111" stroke-width="2"/>
 <text x="80" y="86" font-size="20" font-weight="700" fill="#2b2fd6">User Page</text>
