@@ -16,4 +16,4 @@
 * **Deployment:**
 * **Wireframe:**
 
-<img width="231" height="150" alt="app-flow-wireframe" src="https://github.com/user-attachments/assets/8f576203-d496-4af4-96ad-6a73c75bbc3c" />
+<img width="231" height="200" alt="app-flow-wireframe" src="https://github.com/user-attachments/assets/8f576203-d496-4af4-96ad-6a73c75bbc3c" />
