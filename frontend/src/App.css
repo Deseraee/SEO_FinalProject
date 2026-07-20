@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+:root {
+  --ink: #2B1B14;
+  --ink-soft: #6B5347;
+  --paper: #FFF8F3;
+  --paper-raised: #FFFFFF;
+  --coral: #487fd1;
+  --coral-dark: #0c165a;
+  --peach: #8c99ff;
+  --peach-light: #8ac9e6;
+  --line: #2B1B14;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --radius: 18px;
+  --shadow-pop: 6px 6px 0 var(--ink);
+  --shadow-pop-sm: 4px 4px 0 var(--ink);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+  min-height: 100vh;
+  background: var(--paper);
+  overflow-x: hidden;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 24px 48px;
+  background: var(--paper);
+  position: relative;
+  z-index: 10;
+}
+
+.nav-left .logo {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin: 0;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+
+.hero-section {
+  position: relative;
+  padding: 100px 48px 120px;
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--peach-light);
+}
+
+.hero-content h1 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  line-height: 0.9;
+
+  color: black;
+  letter-spacing: -0.01em;
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--ink);
+  max-width: 480px;
+  margin: 20px auto 40px;
+  background: var(--paper-raised);
+  padding: 10px 20px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.hero-btn {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 16px 36px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hero-btn.primary {
+  background: var(--coral);
+  color: var(--paper-raised);
+
+}
+
+.hero-btn.primary:hover {
+  transform: translate(-2px, -2px);
+  background: var(--coral-dark);
+}
+
+.hero-btn.primary:active {
+  transform: translate(2px, 2px);
+}
+
+.hero-btn:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.features-section {
+  padding: 40px 48px 100px;
+  background: var(--paper);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: var(--paper-raised);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:nth-child(1) {
+  border-top: 8px solid var(--coral);
+}
+
+.feature-card:nth-child(2) {
+  border-top: 8px solid var(--peach);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 9px 0 var(--ink);
+}
+
+.feature-header h3 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin: 0 0 16px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.feature-preview p {
+  font-family: var(--font-body);
+  color: var(--ink-soft);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.flashcard-preview {
+  background: var(--peach-light);
+  border: 2px dashed var(--coral-dark);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+.flashcard-term {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    padding: 20px 24px;
+  }
+
+  .hero-section {
+    padding: 70px 24px 80px;
+  }
+
+  .features-section {
+    padding: 30px 24px 70px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-btn,
+  .feature-card {
+    transition: none;
+  }
+}
