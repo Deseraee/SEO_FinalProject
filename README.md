@@ -30,7 +30,7 @@ Students take an average of 5 classes a semester, requiring roughly 60 hours a w
 | Frontend | React |
 | Backend | Flask |
 | Database | SQLite |
-| Deployment | PythonAnywhere |
+| Deployment | Vercel |
 
 ## Integrations
 
@@ -73,7 +73,7 @@ npm start
 - [ ] Claude-powered plan generation
 - [ ] Google Calendar sync
 - [ ] Wellness recommendation engine
-- [ ] Deployment to PythonAnywhere
+- [ ] Deployment to Vercel
 
 ## Status
 
