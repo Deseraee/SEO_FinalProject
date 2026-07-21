@@ -2,10 +2,19 @@ import { useState } from 'react'
 import LoginPage from './pages/login'
 import UserPage from './pages/user'
 import PlanPage from './pages/plan'
+import AgenaPage from './pages/agenda'
 import './App.css'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
+  const [user, setUser] = useState(null)
+  const [scheduleData, setScheduleData] = useState(null)
+
+  const handleLoginSuccess = (userData) => {
+    setUser(userData)
+    setCurrentPage('plan')
+  }
+
 
   if (currentPage === 'login') {
     return <LoginPage
@@ -23,7 +32,23 @@ function App() {
   }
 
   if (currentPage === 'plan') {
-    return <PlanPage onBack={() => setCurrentPage('home')} />
+    return <PlanPage 
+      onBack={() => setCurrentPage('home')} 
+      user={user}
+      onProfileClick={() => setCurrentPage('profile')}
+      onScheduleCreated={(schedule) => {
+        console.log('Schedule received in App:', schedule);
+        setScheduleData(schedule);
+        setCurrentPage('agenda');
+      }}
+    />
+  }
+  if (currentPage === 'agenda') {
+    return <AgenaPage
+    onBack={() => setCurrentPage('plan')}
+    schedule={scheduleData}
+    user={user}
+    />
   }
 
   return (

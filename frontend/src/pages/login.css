@@ -1,5 +1,3 @@
-
-
 #login {
   width: 100%;
   max-width: 400px;
@@ -39,6 +37,71 @@
   margin: 0 0 28px;
 }
 
+/* Google Login Button - NEW */
+.google-login-btn {
+  width: 100%;
+  padding: 12px 14px;
+  background: white;
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 15px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 8px;
+}
+
+.google-login-btn:hover:not(:disabled) {
+  background: #f7fafc;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.google-login-btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.google-login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Divider - NEW */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ink);
+  opacity: 0.2;
+}
+
+.divider span {
+  padding: 0 16px;
+}
+
+/* Rest of your original styles */
 .login-card form {
   display: flex;
   flex-direction: column;

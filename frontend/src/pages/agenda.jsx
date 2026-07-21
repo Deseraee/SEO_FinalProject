@@ -5,14 +5,6 @@ const START_HOUR = 6
 const END_HOUR = 23     
 const HOURS = Array.from({ length: END_HOUR - START_HOUR + 1 }, (_, i) => START_HOUR + i)
 
-
-const SAMPLE_EVENTS = [
-  { id: 1, title: 'Morning study block', start: 8, end: 9.5, type: 'focus' },
-  { id: 2, title: 'Meeting with scary boss', start: 14, end: 15, type: 'meeting' },
-  { id: 3, title: 'Gym / decompress', start: 17, end: 18, type: 'break' },
-  { id: 4, title: 'Evening review', start: 20, end: 21, type: 'focus' },
-]
-
 function formatHourLabel(hour) {
   const period = hour < 12 || hour === 24 ? 'AM' : 'PM'
   let displayHour = hour % 12
@@ -20,10 +12,79 @@ function formatHourLabel(hour) {
   return `${displayHour} ${period}`
 }
 
-function AgendaPage({ onBack, vibe, conditions, events = SAMPLE_EVENTS }) {
+// Convert the time into hours
+function getHourFromISO(isoString) {
+  const date = new Date(isoString)
+  return date.getHours() + date.getMinutes() / 60
+}
+
+//Formats the time for display
+function formatTimeDisplay(isoString) {
+  const date = new Date(isoString)
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+}
+
+function AgendaPage({ onBack, schedule, user }) {
   const [selectedEvent, setSelectedEvent] = useState(null)
   const dayStart = START_HOUR
   const totalHours = END_HOUR - START_HOUR + 1
+
+  console.log('AgendaPage received schedule:', schedule)
+
+  const hasSchedule = schedule && Array.isArray(schedule) && schedule.length > 0
+
+  const events = hasSchedule 
+    ? schedule.map((item, index) => {
+        const startHour = getHourFromISO(item.startTime)
+        const endHour = getHourFromISO(item.endTime)
+        
+        // Determine event type based on title
+        let type = 'focus'
+        const titleLower = item.title.toLowerCase()
+        if (titleLower.includes('break') || titleLower.includes('rest') || titleLower.includes('lunch')) {
+          type = 'break'
+        } else if (titleLower.includes('meeting') || titleLower.includes('call') || titleLower.includes('appointment')) {
+          type = 'meeting'
+        } else if (titleLower.includes('exercise') || titleLower.includes('gym') || titleLower.includes('walk')) {
+          type = 'break'
+        }
+        
+        return {
+          id: index + 1,
+          title: item.title,
+          start: startHour,
+          end: endHour,
+          type: type,
+          healthTip: item.healthTip || null,
+          startTime: item.startTime,
+          endTime: item.endTime,
+          startDisplay: formatTimeDisplay(item.startTime),
+          endDisplay: formatTimeDisplay(item.endTime)
+        }
+      })
+    : []
+
+  console.log('Processed events:', events)
+
+  // Show message if no schedule
+  if (!hasSchedule) {
+    return (
+      <div className="agenda-page">
+        <header className="agenda-header">
+          <button onClick={onBack} className="agenda-back">
+            ← Back
+          </button>
+          <div className="agenda-title-block">
+            <h1>Your day</h1>
+            <p className="agenda-subtitle">No schedule yet. Create a plan first!</p>
+          </div>
+        </header>
+        <div className="empty-state">
+          <p>Go back to the Plan page and create your schedule</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="agenda-page">
@@ -33,8 +94,8 @@ function AgendaPage({ onBack, vibe, conditions, events = SAMPLE_EVENTS }) {
         </button>
         <div className="agenda-title-block">
           <h1>Your day</h1>
-          {vibe && <p className="agenda-subtitle">Vibe: {vibe}</p>}
-          {conditions && <p className="agenda-subtitle">Notes: {conditions}</p>}
+          {user && user.name && <p className="agenda-subtitle">Welcome, {user.name}!</p>}
+          <p className="agenda-subtitle">{events.length} tasks planned for today</p>
         </div>
       </header>
 
@@ -43,7 +104,6 @@ function AgendaPage({ onBack, vibe, conditions, events = SAMPLE_EVENTS }) {
           className="agenda-grid"
           style={{ '--total-hours': totalHours }}
         >
-          {/* Hour labels + row lines */}
           <div className="time-column">
             {HOURS.map((hour) => (
               <div key={hour} className="time-slot">
@@ -71,7 +131,7 @@ function AgendaPage({ onBack, vibe, conditions, events = SAMPLE_EVENTS }) {
                   >
                     <span className="event-title">{evt.title}</span>
                     <span className="event-time">
-                      {formatHourLabel(evt.start)} – {formatHourLabel(evt.end)}
+                      {evt.startDisplay} – {evt.endDisplay}
                     </span>
                   </button>
                 )
@@ -80,13 +140,19 @@ function AgendaPage({ onBack, vibe, conditions, events = SAMPLE_EVENTS }) {
         </div>
       </div>
 
+
       {selectedEvent && (
         <div className="event-detail-backdrop" onClick={() => setSelectedEvent(null)}>
           <div className="event-detail-card" onClick={(e) => e.stopPropagation()}>
             <h3>{selectedEvent.title}</h3>
-            <p>
-              {formatHourLabel(selectedEvent.start)} – {formatHourLabel(selectedEvent.end)}
+            <p className="event-detail-time">
+              {selectedEvent.startDisplay} – {selectedEvent.endDisplay}
             </p>
+            {selectedEvent.healthTip && (
+              <div className="event-tip-container">
+                <p className="event-tip"> {selectedEvent.healthTip}</p>
+              </div>
+            )}
             <button onClick={() => setSelectedEvent(null)} className="event-detail-close">
               Close
             </button>
