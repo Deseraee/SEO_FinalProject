@@ -57,6 +57,13 @@ function App() {
         <div className="nav-left">
           <h1 className="logo">Today</h1>
         </div>
+        <div className='nav-right'>
+        <img 
+        src="/tdy.png" 
+        alt="Today Logo" 
+        className="nav-logo-image"
+        />
+        </div>
       </nav>
       <section className="growing-decor">
         <div className="growing-decor-left">

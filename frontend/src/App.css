@@ -39,8 +39,9 @@ body {
 
 .navbar {
   display: flex;
+  justify-content: space-between; 
   align-items: center;
-  padding: 24px 48px;
+  padding: 10px 28px;
   background: var(--paper);
   position: relative;
   z-index: 10;
@@ -51,12 +52,21 @@ body {
   font-style: italic;
   font-weight: 700;
   font-size: 1.6rem;
-  margin: 0;
   letter-spacing: -0.01em;
   color: var(--ink);
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+}
 
+.nav-logo-image {
+  width: 80px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 .hero-section {
   position: relative;
   padding: 100px 48px 120px;
@@ -109,7 +119,6 @@ body {
 .hero-btn.primary {
   background: var(--coral);
   color: var(--paper-raised);
-
 }
 
 .hero-btn.primary:hover {
