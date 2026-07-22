@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import './agenda.css'
 
-const START_HOUR = 6
-const END_HOUR = 23
-const HOUR_HEIGHT = 90 
+const START_HOUR = 8
+const END_HOUR = 22
+const HOUR_HEIGHT = 110 
 const SHORT_EVENT_MINUTES = 30
 const HOURS = Array.from({ length: END_HOUR - START_HOUR + 1 }, (_, i) => START_HOUR + i)
 
@@ -122,13 +122,9 @@ function AgendaPage({ onBack, schedule, user }) {
           <button onClick={onBack} className="agenda-back">
             ← Back
           </button>
-          <div className="agenda-title-block">
-            <h1>Your day</h1>
-            <p className="agenda-subtitle">No schedule yet. Create a plan first!</p>
-          </div>
         </header>
         <div className="empty-state">
-          <p>📋 Go back to the Plan page and create your schedule</p>
+          <p> Go back to the Plan page and create your schedule</p>
         </div>
       </div>
     )
@@ -141,7 +137,7 @@ function AgendaPage({ onBack, schedule, user }) {
           ← Back
         </button>
         <div className="agenda-title-block">
-          <h1>Your day</h1>
+          <h1> Today is your day!</h1>
           {user && user.name && <p className="agenda-subtitle">Welcome, {user.name}!</p>}
           <p className="agenda-subtitle">{events.length} tasks planned for today</p>
         </div>

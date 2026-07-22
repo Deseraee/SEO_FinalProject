@@ -33,7 +33,6 @@
   overflow: hidden;
 }
 
-
 .agenda-page::before {
   content: '';
   position: fixed;
